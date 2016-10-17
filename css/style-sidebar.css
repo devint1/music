@@ -8,12 +8,10 @@
  * @copyright Morris Jobke 2013, 2014
  */
 
-#app-navigation {
-	padding-top: 66px;
-}
 
 #app-navigation li > img {
 	float: right;
 	height: 21px;
 	display: none;
 }
+

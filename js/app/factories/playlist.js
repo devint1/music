@@ -20,11 +20,8 @@
  */
 
 
-angular.module('Music').factory('playlists', function(){
-	return [
-		{name: 'test playlist 1', id: 1},
-		{name: 'test playlist 2', id: 2},
-		{name: 'test playlist 3', id: 3},
-		{name: 'test playlist 4', id: 4}
-	];
-});
+angular.module('Music').factory('playlists', ["Restangular", function(Restangular) {
+	return {
+		getPlaylists: function() { return Restangular.all('playlists').getList(); }
+	};
+}]);

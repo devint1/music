@@ -517,9 +517,12 @@ angular.module('Music').controller('PlayerController',
 angular.module('Music').controller('PlaylistController',
 	['$scope', 'playlists', function ($scope, playlists) {
 
-	$scope.playlists = playlists;
-
+	playlists.getPlaylists().then(function(playlists) {
+		$scope.playlists = playlists;
+	});
 }]);
+
+
 angular.module('Music').directive('albumart', ['$http', '$queueFactory', function($http, $queueFactory) {
 	// Calling $http.get immediately for all album cover images would be bad idea because it would
 	// block the playback until all the covers are loaded. Hence, we use queue which allows 5 simultaneous
@@ -664,14 +667,11 @@ angular.module('Music').factory('Audio', ['$rootScope', function ($rootScope) {
 	return new PlayerWrapper();
 }]);
 
-angular.module('Music').factory('playlists', function(){
-	return [
-		{name: 'test playlist 1', id: 1},
-		{name: 'test playlist 2', id: 2},
-		{name: 'test playlist 3', id: 3},
-		{name: 'test playlist 4', id: 4}
-	];
-});
+angular.module('Music').factory('playlists', ["Restangular", function(Restangular) {
+	return {
+		getPlaylists: function() { return Restangular.all('playlists').getList(); }
+	};
+}]);
 
 angular.module('Music').factory('Token', [function () {
 	return document.getElementsByTagName('head')[0].getAttribute('data-requesttoken');

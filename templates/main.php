@@ -46,7 +46,7 @@ if($version[0] < 8 || $version[0] === 8 && $version[1] < 2) {
 	<div ng-controller="MainController">
 		<!-- this will be used to display the flash element to give the user a chance to unblock flash -->
 		<div id="sm2-container" ng-class="{started: started}"></div>
-		<!--<div id="app-navigation">
+		<div id="app-navigation">
 			<ul ng-controller="PlaylistController">
 				<li><a href="#/" translate>All</a></li>
 				<li class="app-navigation-separator"><a href="#/" translate>Favorites</a></li>
@@ -55,7 +55,7 @@ if($version[0] < 8 || $version[0] === 8 && $version[1] < 2) {
 					<a href="#/playlist/{{playlist.id}}">{{playlist.name}}</a>
 				</li>
 			</ul>
-		</div>-->
+		</div>
 
 		<div id="app-content">
 

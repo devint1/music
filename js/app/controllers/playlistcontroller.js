@@ -24,6 +24,8 @@
 angular.module('Music').controller('PlaylistController',
 	['$scope', 'playlists', function ($scope, playlists) {
 
-	$scope.playlists = playlists;
-
+	playlists.getPlaylists().then(function(playlists) {
+		$scope.playlists = playlists;
+	});
 }]);
+
