@@ -23,8 +23,10 @@ if($version[0] < 8 || $version[0] === 8 && $version[1] < 2) {
 \OCP\Util::addScript('music', 'vendor/angular-gettext/dist/angular-gettext.min');
 \OCP\Util::addScript('music', 'vendor/ngQueue/ngQueue.min');
 \OCP\Util::addScript('music', 'vendor/aurora/aurora');
+\OCP\Util::addScript('music', 'vendor/aurora/alac');
 \OCP\Util::addScript('music', 'vendor/aurora/flac');
 \OCP\Util::addScript('music', 'vendor/aurora/mp3');
+\OCP\Util::addScript('music', 'vendor/aurora/aac');
 \OCP\Util::addScript('music', 'vendor/js-cookie/src/js.cookie');
 \OCP\Util::addScript('music', 'public/app');
 

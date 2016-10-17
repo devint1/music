@@ -387,7 +387,7 @@ angular.module('Music').controller('PlayerController',
 
 	$scope.getPlayableFileURL = function (track) {
 		for(var mimeType in track.files) {
-			if(mimeType=='audio/flac' || mimeType=='audio/mpeg' || mimeType=='audio/ogg') {
+			if(mimeType=='audio/flac' || mimeType=='audio/mpeg' || mimeType=='audio/ogg' || mimeType=='audio/mp4') {
 				return {
 					'type': mimeType,
 					'url': track.files[mimeType] + '?requesttoken=' + encodeURIComponent(OC.requestToken)
@@ -775,11 +775,11 @@ PlayerWrapper.prototype.fromURL = function(typeAndURL) {
 	var url = typeAndURL.url;
 	var type = typeAndURL.type;
 
-	if (soundManager.canPlayURL(url)) {
-		this.underlyingPlayer = 'sm2';
-	} else {
+	//if (soundManager.canPlayURL(url)) {
+	//	this.underlyingPlayer = 'sm2';
+	//} else {
 		this.underlyingPlayer = 'aurora';
-	}
+	//}
 	console.log('Using ' + this.underlyingPlayer + ' for type ' + type + ' URL ' + url);
 
 	switch(this.underlyingPlayer) {
