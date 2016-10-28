@@ -58,4 +58,21 @@ angular.module('Music', ['restangular', 'gettext', 'ngRoute', 'ngQueue'])
 			// add CSRF token
 			Restangular.setDefaultHeaders({requesttoken: Token});
 		}
-	]);
+	])
+
+	// Support changing path without reloading
+	// See https://stackoverflow.com/a/24102139
+	.run(['$route', '$rootScope', '$location', function ($route, $rootScope, $location) {
+		var original = $location.path;
+		$location.path = function (path, reload) {
+			if (reload === false) {
+				var lastRoute = $route.current;
+				var un = $rootScope.$on('$locationChangeSuccess', function () {
+					$route.current = lastRoute;
+					un();
+				});
+			}
+			return original.apply($location, [path]);
+		};
+	}]);
+

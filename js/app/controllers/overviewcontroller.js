@@ -9,19 +9,11 @@
  */
 
 angular.module('Music').controller('OverviewController',
-	['$scope', '$rootScope', 'playlistService', 'Restangular', '$route', '$window',
-	function ($scope, $rootScope, playlistService, Restangular, $route, $window) {
-
-		// Prevent controller reload when the URL is updated with window.location.hash.
-		// See http://stackoverflow.com/a/12429133/2104976
-		var lastRoute = $route.current;
-		$scope.$on('$locationChangeSuccess', function(event) {
-			$route.current = lastRoute;
-		});
+	['$scope', '$rootScope', 'playlistService', 'Restangular', '$route', '$window', '$location',
+	function ($scope, $rootScope, playlistService, Restangular, $route, $window, $location) {
 
 		$scope.playTrack = function(track) {
-			// update URL hash
-			window.location.hash = '#/track/' + track.id;
+			$location.path('/track/' + track.id, false);
 
 			var artist = _.find($scope.$parent.artists,
 				function(artist) {
@@ -56,8 +48,7 @@ angular.module('Music').controller('OverviewController',
 		};
 
 		$scope.playAlbum = function(album) {
-			// update URL hash
-			window.location.hash = '#/album/' + album.id;
+			$location.path('/album/' + album.id, false);
 
 			var tracks = _.sortBy(album.tracks,
 					function(track) {
@@ -69,8 +60,7 @@ angular.module('Music').controller('OverviewController',
 		};
 
 		$scope.playArtist = function(artist) {
-			// update URL hash
-			window.location.hash = '#/artist/' + artist.id;
+			$location.path('/artist/' + artist.id, false);
 
 			var albums = _.sortBy(artist.albums,
 				function(album) {
@@ -106,8 +96,7 @@ angular.module('Music').controller('OverviewController',
 
 		// emited on end of playlist by playerController
 		playlistService.subscribe('playlistEnded', function(){
-			// update URL hash
-			window.location.hash = '#/';
+			$location.path('/', false);
 		});
 
 		$scope.scrollToItem = function(itemId) {
